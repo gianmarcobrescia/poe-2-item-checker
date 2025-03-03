@@ -123,11 +123,11 @@ export function findStatId(statText: string): string | null {
   );
 
   if (exactMatch) {
-    console.log('Found exact match:', {
-      input: normalizedInput,
-      match: exactMatch.text,
-      id: exactMatch.id
-    });
+    // console.log('Found exact match:', {
+    //   input: normalizedInput,
+    //   match: exactMatch.text,
+    //   id: exactMatch.id
+    // });
     return exactMatch.id;
   }
 

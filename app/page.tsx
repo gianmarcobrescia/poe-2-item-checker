@@ -13,7 +13,7 @@ export default function Home() {
       <main className="relative max-w-2xl mx-auto space-y-8">
         <div className="space-y-4 text-center">
           <h1 className="text-6xl font-black bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg">
-            Pewpewlazer&apos;s
+            GMB's
           </h1>
           <p className="text-2xl font-medium text-white/80">
             PoE2 Item Checker

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+#item {
+  height: 50px;
+}
+
 :root {
   --background: #0a0f17;
   --foreground: #ffffff;
