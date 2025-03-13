@@ -20,6 +20,7 @@ export default function LeagueSelector({ selectedLeague, onLeagueChange }: Leagu
                  transition-all duration-200"
       >
         <option value="Standard">Standard</option>
+        <option value="Asd">Asd</option>
       </select>
     </div>
   );

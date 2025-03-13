@@ -16,8 +16,7 @@ export default function ItemChecker({league}: ItemCheckerProps) {
     const [itemText, setItemText] = useState('');
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
-    const [includeItemLevel, setIncludeItemLevel] = useState(false);
-    const [halfValue, setHalfValue] = useState(false);
+    const [reduceStatValuePercentage, setReduceStatValuePercentage] = useState(1);
     const [isStatsLoaded, setIsStatsLoaded] = useState(false);
 
     useEffect(() => {
@@ -82,9 +81,6 @@ export default function ItemChecker({league}: ItemCheckerProps) {
                                 filters: {
                                     category: parsedItem.itemClass ? {
                                         option: ITEM_CLASS_MAP[parsedItem.itemClass]
-                                    } : undefined,
-                                    ilvl: parsedItem.itemLevel && includeItemLevel ? {
-                                        min: parsedItem.itemLevel
                                     } : undefined
                                 },
                                 disabled: false
@@ -117,7 +113,7 @@ export default function ItemChecker({league}: ItemCheckerProps) {
 
                         return {
                             id: statId,
-                            value: {min: halfValue ? Math.round(value/2) : value},
+                            value: {min: Math.round(value*reduceStatValuePercentage)},
                             disabled: false
                         };
                     })
@@ -143,9 +139,6 @@ export default function ItemChecker({league}: ItemCheckerProps) {
                                 filters: {
                                     category: parsedItem.itemClass ? {
                                         option: ITEM_CLASS_MAP[parsedItem.itemClass]
-                                    } : undefined,
-                                    ilvl: parsedItem.itemLevel && includeItemLevel ? {
-                                        min: parsedItem.itemLevel
                                     } : undefined
                                 },
                                 disabled: false
@@ -157,9 +150,6 @@ export default function ItemChecker({league}: ItemCheckerProps) {
             // Clean up undefined values
             if (!parsedItem.itemClass) {
                 delete query.query.filters?.type_filters.filters.category;
-            }
-            if (!parsedItem.itemLevel || !includeItemLevel) {
-                delete query.query.filters?.type_filters.filters.ilvl;
             }
 
             await new Promise(resolve => setTimeout(resolve, RATE_LIMIT_DELAY));
@@ -308,58 +298,16 @@ export default function ItemChecker({league}: ItemCheckerProps) {
                 </div>
             )}
 
-            {/*<div className="flex items-center justify-center gap-3 text-white/80">*/}
-            {/*    <label htmlFor="includeItemLevel" className="text-sm select-none">*/}
-            {/*        Include item level in search*/}
-            {/*    </label>*/}
-            {/*    <button*/}
-            {/*        role="switch"*/}
-            {/*        id="includeItemLevel"*/}
-            {/*        aria-checked={includeItemLevel}*/}
-            {/*        onClick={() => setIncludeItemLevel(!includeItemLevel)}*/}
-            {/*        className={`*/}
-            {/*            relative inline-flex h-6 w-11 items-center rounded-full*/}
-            {/*            transition-colors duration-200 ease-in-out*/}
-            {/*            focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2*/}
-            {/*            ${includeItemLevel ? 'bg-gradient-to-r from-blue-600 to-cyan-600' : 'bg-white/10'}*/}
-            {/*          `}*/}
-            {/*    >*/}
-            {/*  <span*/}
-            {/*      className={`*/}
-            {/*      ${includeItemLevel ? 'translate-x-6' : 'translate-x-1'}*/}
-            {/*      inline-block h-4 w-4 transform rounded-full*/}
-            {/*      bg-white transition duration-200 ease-in-out*/}
-            {/*    `}*/}
-            {/*  />*/}
-            {/*    </button>*/}
-            {/*</div>*/}
-
             <div className="flex items-center justify-center gap-3 text-white/80">
-                <label htmlFor="halfValue" className="text-sm select-none">
-                    Half values
-                </label>
-                <button
-                    role="switch"
-                    id="halfValue"
-                    aria-checked={halfValue}
-                    onClick={() => setHalfValue(!halfValue)}
-                    className={`
-                        relative inline-flex h-6 w-11 items-center rounded-full
-                        transition-colors duration-200 ease-in-out
-                        focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2
-                        ${includeItemLevel ? 'bg-gradient-to-r from-blue-600 to-cyan-600' : 'bg-white/10'}
-                      `}
-                >
-              <span
-                  className={`
-                  ${halfValue ? 'translate-x-6' : 'translate-x-1'}
-                  inline-block h-4 w-4 transform rounded-full
-                  bg-white transition duration-200 ease-in-out
-                `}
-              />
-                </button>
+                <input type="radio" id="100" name="fav_language" onChange={() => setReduceStatValuePercentage(1)}/>
+                <label htmlFor="100">None</label><br/>
+                <input type="radio" id="90" name="fav_language" onChange={() => setReduceStatValuePercentage(0.9)}/>
+                <label htmlFor="90">-10%</label><br/>
+                <input type="radio" id="80" name="fav_language" onChange={() => setReduceStatValuePercentage(0.8)}/>
+                <label htmlFor="80">-20%</label><br/>
+                <input type="radio" id="50" name="fav_language" onChange={() => setReduceStatValuePercentage(0.5)}/>
+                <label htmlFor="50">-50%</label>
             </div>
-
 
             <button
                 className="w-full py-4 px-6 bg-gradient-to-r from-blue-600 to-cyan-600

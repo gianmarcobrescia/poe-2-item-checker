@@ -88,8 +88,7 @@ export async function POST(request: Request) {
 
     const body = await request.json();
     const baseUrl = getBaseUrl();
-    const url = `https://www.pathofexile.com/api/trade2/fetch/${body.data.result.slice(0,10).join(',')}&query=${body.data.id}`;
-    console.log(`calling ${url}`)
+    const url = `${baseUrl}/api/trade2/fetch/${body.data.result.slice(0,10).join(',')}&query=${body.data.id}`;
     const response = await fetch(url, {
       method: 'GET'
     });
