@@ -5,6 +5,7 @@ import {timeSince} from '../gmb/time';
 import {ITEM_CLASS_MAP} from '../constants/itemTypes';
 import {renderMods} from "@/app/gmb/showMods";
 import {parseItemText} from "@/app/gmb/parseItem";
+import type {FetchItem} from "@/app/types/fetchItem";
 
 interface ItemCheckerProps {
     league: string;
@@ -34,7 +35,10 @@ export default function ItemChecker({league}: ItemCheckerProps) {
 
     const handleSearch = async () => {
 
-        document.getElementById("itemsFromTrade").innerHTML = '';
+        const itemsForTradeHtml = document.getElementById("itemsFromTrade");
+        if (itemsForTradeHtml != null) {
+            itemsForTradeHtml.innerHTML = '';
+        }
 
         if (!itemText.trim()) {
             setError('Please paste an item first');
@@ -195,8 +199,8 @@ export default function ItemChecker({league}: ItemCheckerProps) {
                     ul.appendChild(li);
                 } else {
                     result
-                        .filter(i => i != null)
-                        .forEach(i => {
+                        .filter((i: FetchItem) => i != null)
+                        .forEach((i: FetchItem) => {
                             const date = timeSince(i.listing.indexed);
                             const li = document.createElement('li');  // Create a new <li> element
                             const textNode = document.createTextNode(`${i.listing.price.amount} ${i.listing.price.currency} - ${date}`);

@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 export function Footer() {
   return (
     <footer className="w-full border-t border-white/10 bg-card/50 backdrop-blur-sm">

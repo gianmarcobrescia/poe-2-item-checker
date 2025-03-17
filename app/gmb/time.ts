@@ -1,6 +1,8 @@
 export function timeSince(date: string): string {
 
-    let seconds = Math.floor((new Date() - new Date(date)) / 1000);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    const seconds = Math.floor((new Date() - new Date(date)) / 1000);
 
     let interval = seconds / 31536000;
 

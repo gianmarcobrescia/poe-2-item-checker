@@ -1,8 +1,10 @@
 import {parseItemText} from "@/app/gmb/parseItem";
 
 export function renderMods(text: string) {
-    document.getElementById("itemMods").innerHTML = '';
-    document.getElementById("itemsFromTrade").innerHTML = '';
+    const itemModsHtml = document.getElementById("itemMods");
+    if(itemModsHtml != null) itemModsHtml.innerHTML = '';
+     const itemsFromTrade = document.getElementById("itemsFromTrade");
+    if(itemsFromTrade != null) itemsFromTrade.innerHTML = '';
 
     try {
         const parsedItem = parseItemText(text);
