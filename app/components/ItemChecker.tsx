@@ -57,9 +57,7 @@ export default function ItemChecker({league}: ItemCheckerProps) {
             const parsedItem = parseItemText(itemText);
 
             if (parsedItem.itemClass && !ITEM_CLASS_MAP[parsedItem.itemClass]) {
-                setError(`Item type "${parsedItem.itemClass}" is not supported yet`);
-                setLoading(false);
-                return;
+                console.warn(`Item type "${parsedItem.itemClass}" is not supported yet`);
             }
 
             // Create base query structure
@@ -70,6 +68,15 @@ export default function ItemChecker({league}: ItemCheckerProps) {
                 },
                 sort: {price: "asc"}
             };
+
+            let category = {}
+            if (parsedItem.itemClass && ITEM_CLASS_MAP[parsedItem.itemClass]) {
+                category = {
+                    category: {
+                        option: ITEM_CLASS_MAP[parsedItem.itemClass]
+                    }
+                }
+            }
 
             // Build the query based on item type
             let query;
@@ -83,9 +90,7 @@ export default function ItemChecker({league}: ItemCheckerProps) {
                         filters: {
                             type_filters: {
                                 filters: {
-                                    category: parsedItem.itemClass ? {
-                                        option: ITEM_CLASS_MAP[parsedItem.itemClass]
-                                    } : undefined
+                                    ...category
                                 },
                                 disabled: false
                             }
@@ -140,20 +145,12 @@ export default function ItemChecker({league}: ItemCheckerProps) {
                         }],
                         filters: {
                             type_filters: {
-                                filters: {
-                                    category: parsedItem.itemClass ? {
-                                        option: ITEM_CLASS_MAP[parsedItem.itemClass]
-                                    } : undefined
-                                },
+                                ...category,
                                 disabled: false
                             }
                         }
                     }
                 };
-            }
-            // Clean up undefined values
-            if (!parsedItem.itemClass) {
-                delete query.query.filters?.type_filters.filters.category;
             }
 
             await new Promise(resolve => setTimeout(resolve, RATE_LIMIT_DELAY));
@@ -203,7 +200,7 @@ export default function ItemChecker({league}: ItemCheckerProps) {
                         .forEach((i: FetchItem) => {
                             const date = timeSince(i.listing.indexed);
                             const li = document.createElement('li');  // Create a new <li> element
-                            const textNode = document.createTextNode(`${i.listing.price.amount} ${i.listing.price.currency} - ${date}`);
+                            const textNode = document.createTextNode(`${i.listing.price.amount} ${i.listing.price.currency} - ${date} (${i.item.baseType} ilvl:${i.item.ilvl})`);
                             li.appendChild(textNode);
                             ul.appendChild(li);
                         });

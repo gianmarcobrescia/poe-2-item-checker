@@ -1,5 +1,6 @@
 export interface FetchItem {
   listing: Listing;
+  item: Item;
 }
 
 interface Listing {
@@ -11,4 +12,9 @@ interface Listing {
 interface Price {
   amount: number;
   currency: string;
+}
+
+interface Item {
+  baseType: string;
+  ilvl: number;
 }
