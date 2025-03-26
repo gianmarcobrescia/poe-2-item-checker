@@ -1,5 +1,5 @@
 'use client';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import {fetchStats, findStatId, extractValue} from '../utils/stats';
 import {timeSince} from '../gmb/time';
 import {ITEM_CLASS_MAP} from '../constants/itemTypes';
@@ -14,6 +14,7 @@ interface ItemCheckerProps {
 const RATE_LIMIT_DELAY = 1000;
 
 export default function ItemChecker({league}: ItemCheckerProps) {
+    const itemSearchBoxRef = useRef<HTMLInputElement>(null);
     const [itemText, setItemText] = useState('');
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
@@ -31,6 +32,7 @@ export default function ItemChecker({league}: ItemCheckerProps) {
             }
         };
         loadStats();
+        itemSearchBoxRef.current!.focus();
     }, []);
 
     const handleSearch = async () => {
@@ -223,6 +225,7 @@ export default function ItemChecker({league}: ItemCheckerProps) {
         if (item != null) {
             item.innerHTML = '';
         }
+        itemSearchBoxRef.current!.focus();
     }
 
     const formatItemText = (text: string) => {
@@ -260,6 +263,7 @@ export default function ItemChecker({league}: ItemCheckerProps) {
             <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl blur opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"/>
                 <div id="item"
+                     ref={itemSearchBoxRef}
                      contentEditable
                      className="relative w-full h-64 p-4 rounded-xl bg-slate-900/90 border border-white/10
                      focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50
