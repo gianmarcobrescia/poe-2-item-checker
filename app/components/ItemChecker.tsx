@@ -218,6 +218,13 @@ export default function ItemChecker({league}: ItemCheckerProps) {
         }
     };
 
+    const clearSearchBox = () => {
+        const item = document.getElementById("item");
+        if (item != null) {
+            item.innerHTML = '';
+        }
+    }
+
     const formatItemText = (text: string) => {
         if (!text) return '';
 
@@ -251,8 +258,7 @@ export default function ItemChecker({league}: ItemCheckerProps) {
         <div className="space-y-4 backdrop-blur-sm bg-white/5 rounded-2xl p-6 shadow-xl">
             {/*Panel to past the item stats*/}
             <div className="relative group">
-                <div
-                    className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl blur opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"/>
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl blur opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"/>
                 <div id="item"
                      contentEditable
                      className="relative w-full h-64 p-4 rounded-xl bg-slate-900/90 border border-white/10
@@ -278,6 +284,17 @@ export default function ItemChecker({league}: ItemCheckerProps) {
                      spellCheck={false}
                 />
             </div>
+            <button
+                className="w-full py-4 px-6 bg-gradient-to-r from-blue-600 to-cyan-600
+                   hover:from-blue-500 hover:to-cyan-500 rounded-xl text-white
+                   font-medium shadow-lg shadow-blue-500/20 transition-all
+                   duration-200 disabled:opacity-50 relative group"
+                onClick={clearSearchBox}
+            >
+                <div
+                    className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-200"/>
+                <div className="relative">Clear</div>
+            </button>
 
             {/*Panel showing the item mods*/}
             <div className="relative group">
