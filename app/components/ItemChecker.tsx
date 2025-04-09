@@ -147,7 +147,9 @@ export default function ItemChecker({league}: ItemCheckerProps) {
                         }],
                         filters: {
                             type_filters: {
-                                ...category,
+                                filters: {
+                                    ...category
+                                },
                                 disabled: false
                             }
                         }
