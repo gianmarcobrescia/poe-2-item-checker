@@ -1,5 +1,8 @@
 # 🎮 PoE Item Checker
 
+Fork of:https://github.com/sanzodown/poe-item-checker/activity
+Updated to commit: 280309 7 Apr 2025 
+
 Poe APIs
 https://www.pathofexile.com/developer/docs/reference
 
