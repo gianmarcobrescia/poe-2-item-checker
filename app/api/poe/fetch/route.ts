@@ -90,7 +90,12 @@ export async function POST(request: Request) {
     const baseUrl = getBaseUrl();
     const url = `${baseUrl}/api/trade2/fetch/${body.data.result.slice(0,10).join(',')}&query=${body.data.id}`;
     const response = await fetch(url, {
-      method: 'GET'
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'User-Agent': 'OAuth poe-item-checker/1.0.0 (contact: sanzodown@hotmail.fr)',
+        'Accept': '*/*',
+      }
     });
 
     // Update rate limits from response headers
