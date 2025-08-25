@@ -1,14 +1,21 @@
 # 🎮 PoE Item Checker
 
-Fork of:https://github.com/sanzodown/poe-item-checker/activity
+##RUN IN DOCKER
+
+- cd to the DockerFile dir
+- docker build .
+- grab the ID
+- docker run -d --restart unless-stopped -p 3000:3000  --name poe-checker {ID_FROM_BEFORE}
+
+##Fork of:https://github.com/sanzodown/poe-item-checker/activity
 Updated to commit: 280309 7 Apr 2025 
 
-Poe APIs
+##Poe APIs
 https://www.pathofexile.com/developer/docs/reference
 
 https://www.reddit.com/r/pathofexiledev/comments/7aiil7/how_to_make_your_own_queries_against_the_official/
 
-Example item
+##Example item
 
 Item Class: Charms
 Rarity: Magic
