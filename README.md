@@ -1,11 +1,15 @@
 # 🎮 PoE Item Checker
 
 ##RUN IN DOCKER
-
 - cd to the DockerFile dir
 - docker build .
-- grab the ID
-- docker run -d --restart unless-stopped -p 3000:3000  --name poe-checker {ID_FROM_BEFORE}
+- grab the {ID}
+- docker run -d --restart unless-stopped -p 3000:3000  --name poe-checker {ID}
+
+##UPDATE CONTAINER
+- docker ps
+- docker stop {ID}
+- docker rm {ID}
 
 ##Fork of:https://github.com/sanzodown/poe-item-checker/activity
 Updated to commit: 280309 7 Apr 2025 
@@ -17,7 +21,7 @@ https://www.reddit.com/r/pathofexiledev/comments/7aiil7/how_to_make_your_own_que
 
 ##Example item
 
-Item Class: Charms
+Io  tem Class: Charms
 Rarity: Magic
 Investigator's Sapphire Charm of the Apprentice
 --------
