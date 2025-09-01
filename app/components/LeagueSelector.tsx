@@ -19,7 +19,7 @@ export default function LeagueSelector({ selectedLeague, onLeagueChange }: Leagu
                  focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50
                  transition-all duration-200"
       >
-          <option value="Dawn%20of%20the%20Hunt">Dawn of the Hunt</option>
+          <option value="Rise%20of%20the%20Abyssal">Rise of the Abyssal</option>
         <option value="Standard">Standard</option>
       </select>
     </div>

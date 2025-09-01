@@ -4,7 +4,7 @@ import ItemChecker from '@/app/components/ItemChecker';
 import LeagueSelector from '@/app/components/LeagueSelector';
 
 export default function Home() {
-  const [selectedLeague, setSelectedLeague] = useState('Dawn of the Hunt');
+  const [selectedLeague, setSelectedLeague] = useState('Rise of the Abyssal');
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-950 to-slate-900 p-8">
